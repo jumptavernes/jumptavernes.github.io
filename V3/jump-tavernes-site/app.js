@@ -1,5 +1,5 @@
 import { SITE_CONFIG } from "./config.js";
-import { buildWhatsAppMessage } from "./whatsapp.js";
+import { buildWhatsAppUrl } from "./whatsapp.js";
 
 const hero = document.querySelector("[data-hero]");
 const stateButtons = [...document.querySelectorAll("[data-state-button]")];
@@ -130,6 +130,6 @@ form.addEventListener("submit", (event) => {
   const status = document.querySelector("[data-form-status]");
   if (!SITE_CONFIG.whatsappNumber) { status.textContent = "Falta configurar el número de WhatsApp de JUMP antes de publicar."; return; }
   status.textContent = "";
-  const url = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(buildWhatsAppMessage(data))}`;
+  const url = buildWhatsAppUrl(data);
   window.open(url, "_blank", "noopener,noreferrer");
 });
