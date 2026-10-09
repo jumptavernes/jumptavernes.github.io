@@ -17,3 +17,30 @@
 /* Visual QA refinements */
 @media(min-width:1051px){.hero-copy--left{width:min(30rem,30vw)}.eyebrow{font-size:clamp(1.45rem,2.1vw,2.3rem)}}
 @media(max-width:720px){.header-actions{gap:0}.menu-button{display:grid!important;width:2.8rem;height:2.8rem;place-content:center;position:fixed;top:1.35rem;right:1rem;z-index:22}.hero-copy--right{min-width:0;grid-template-columns:minmax(0,1fr)}.state-tabs{gap:.45rem;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.state-tabs button{min-width:0;padding:0 .65rem;font-size:.78rem;gap:.55rem;white-space:nowrap}}
+
+/* V2 visual assets: desktop/tablet only. Mobile retains the approved original composition. */
+.hero-bg-image,.decor-image,.ball-shadow-image,.cta-arrow--desktop{display:none}.cta-arrow--legacy{font-size:1.8rem;font-weight:300}
+@media(min-width:721px){
+  .hero-bg-image,.decor-image{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .ambient-light{display:none}
+  .decor>i{display:none}
+  .ball-wrap{isolation:isolate}
+  .ball-wrap picture{display:block;width:100%;height:100%}
+  .ball-image{filter:none}
+  .ball-shadow{display:none}
+  .ball-shadow-image{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:-1;pointer-events:none}
+  .cta-arrow--legacy{display:none}
+  .cta-arrow--desktop{display:block;flex:0 0 auto;width:1.8rem;height:1.2rem;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+}
+@media(min-width:721px) and (max-width:1050px){
+  .state-tabs{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.55rem}
+  .state-tabs button{min-width:0;padding:0 .75rem;gap:.6rem;font-size:.86rem;text-align:left}
+}
+@media(min-width:1051px){
+  .hero-copy--left{width:min(30rem,30vw)}
+  .ball-wrap{left:27%;bottom:10%;width:min(36vw,58rem)}
+  .hero-copy--right{right:clamp(2rem,4vw,5rem);top:clamp(12rem,27vh,16rem);width:clamp(20rem,30vw,31rem)}
+  .state-copy h1,.state-copy h2{max-width:100%;font-size:clamp(4rem,6.4vw,7.25rem);line-height:.86;letter-spacing:-.045em;white-space:nowrap}
+  .hero-cta{min-height:4.25rem;align-items:center}
+  .state-tabs{margin-top:1.7rem}
+}

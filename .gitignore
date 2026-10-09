@@ -9,6 +9,7 @@
 # La web final sí se publica
 !index.html
 !*.webp
+!V3/jump-tavernes-site/assets/v2/*.png
 !.nojekyll
 !.github/
 !.github/workflows/
