@@ -1,5 +1,7 @@
+export const WHATSAPP_NUMBER = "34658276396";
+
 export const SITE_CONFIG = {
-  whatsappNumber: "",
+  whatsappNumber: WHATSAPP_NUMBER,
   schedules: [
     { id: "morning", label: "Mañana", hours: "10:00 a 15:00", message: "Mañana (10:00–15:00)" },
     { id: "afternoon", label: "Tarde", hours: "17:00 a 22:00", message: "Tarde (17:00–22:00)" },
