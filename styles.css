@@ -80,3 +80,24 @@
   .practical-info{padding-top:2.5rem}
   .map-frame,.map-frame iframe{min-height:25rem}
 }
+
+/* Gallery carousel */
+.gallery-carousel{position:relative;margin-top:5rem;min-height:25rem;border-radius:2rem;overflow:hidden;background:#0a6845;isolation:isolate}
+.gallery-viewport{position:absolute;inset:0;overflow:hidden;border-radius:inherit;touch-action:pan-y;outline-offset:-5px}
+.gallery-track{display:flex;width:100%;height:100%;transition:transform .62s var(--ease);will-change:transform}
+.gallery-slide{position:relative;flex:0 0 100%;width:100%;height:100%;overflow:hidden;background:#dce4d9}
+.gallery-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,30,17,.22),transparent 32%);pointer-events:none}
+.gallery-slide img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.gallery-arrow{position:absolute;z-index:2;top:50%;width:3.6rem;height:3.6rem;border:1px solid rgba(255,255,255,.65);border-radius:50%;display:grid;place-items:center;background:rgba(10,38,25,.58);color:#fff;box-shadow:0 .55rem 1.5rem rgba(0,25,14,.18);backdrop-filter:blur(8px);transform:translateY(-50%);transition:background .25s,transform .25s}
+.gallery-arrow:hover{background:rgba(0,103,60,.9);transform:translateY(-50%) scale(1.04)}
+.gallery-arrow span{font-size:1.65rem;line-height:1}
+.gallery-arrow--prev{left:1.4rem}.gallery-arrow--next{right:1.4rem}
+.gallery-dots{position:absolute;z-index:2;left:50%;bottom:1.25rem;display:flex;gap:.55rem;padding:.55rem .7rem;border-radius:999px;background:rgba(4,30,18,.42);backdrop-filter:blur(8px);transform:translateX(-50%)}
+.gallery-dot{width:.58rem;height:.58rem;padding:0;border:1px solid rgba(255,255,255,.9);border-radius:50%;background:transparent;transition:background .25s,transform .25s}
+.gallery-dot[aria-current="true"]{background:#fff;transform:scale(1.2)}
+@media(max-width:720px){
+  .gallery-carousel{min-height:18rem;margin-top:3rem;border-radius:1.35rem}
+  .gallery-arrow{display:none}
+  .gallery-dots{bottom:.85rem;gap:.45rem;padding:.45rem .6rem}
+  .gallery-dot{width:.52rem;height:.52rem}
+}

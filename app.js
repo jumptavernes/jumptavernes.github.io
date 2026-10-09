@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from "./config.js";
+import { SITE_CONFIG } from "./config.js?v=gallery-1";
 import { buildWhatsAppUrl } from "./whatsapp.js";
 
 const hero = document.querySelector("[data-hero]");
@@ -14,6 +14,61 @@ const menuButton = document.querySelector("[data-menu-button]");
 const mobileMenu = document.querySelector("[data-mobile-menu]");
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 let currentState = "reservation", transitioning = false, lastFocus = null, touchStartY = null, wheelTotal = 0, wheelTimer;
+
+const gallery = document.querySelector("[data-gallery]");
+if (gallery && SITE_CONFIG.galleryImages.length) {
+  const track = gallery.querySelector("[data-gallery-track]");
+  const viewport = gallery.querySelector("[data-gallery-viewport]");
+  const dots = gallery.querySelector("[data-gallery-dots]");
+  const status = gallery.querySelector("[data-gallery-status]");
+  let galleryIndex = 0;
+  let gallerySwipeStart = null;
+
+  SITE_CONFIG.galleryImages.forEach((image, index) => {
+    const slide = document.createElement("div");
+    slide.className = "gallery-slide";
+    slide.setAttribute("role", "group");
+    slide.setAttribute("aria-roledescription", "diapositiva");
+    slide.setAttribute("aria-label", `${index + 1} de ${SITE_CONFIG.galleryImages.length}`);
+    slide.innerHTML = `<img src="${image.src}" alt="${image.alt}" loading="lazy" decoding="async" draggable="false">`;
+    track.append(slide);
+
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "gallery-dot";
+    dot.setAttribute("aria-label", `Ver fotografía ${index + 1}`);
+    dot.addEventListener("click", () => showGalleryImage(index));
+    dots.append(dot);
+  });
+
+  const galleryDots = [...dots.children];
+  const showGalleryImage = (next) => {
+    galleryIndex = (next + SITE_CONFIG.galleryImages.length) % SITE_CONFIG.galleryImages.length;
+    track.style.transform = `translate3d(${-galleryIndex * 100}%,0,0)`;
+    galleryDots.forEach((dot, index) => dot.setAttribute("aria-current", String(index === galleryIndex)));
+    status.textContent = `Fotografía ${galleryIndex + 1} de ${SITE_CONFIG.galleryImages.length}`;
+  };
+
+  gallery.querySelector("[data-gallery-prev]").addEventListener("click", () => showGalleryImage(galleryIndex - 1));
+  gallery.querySelector("[data-gallery-next]").addEventListener("click", () => showGalleryImage(galleryIndex + 1));
+  viewport.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") { event.preventDefault(); showGalleryImage(galleryIndex - 1); }
+    if (event.key === "ArrowRight") { event.preventDefault(); showGalleryImage(galleryIndex + 1); }
+  });
+  viewport.addEventListener("pointerdown", (event) => {
+    gallerySwipeStart = { x: event.clientX, y: event.clientY };
+  });
+  viewport.addEventListener("pointerup", (event) => {
+    if (!gallerySwipeStart) return;
+    const distanceX = gallerySwipeStart.x - event.clientX;
+    const distanceY = gallerySwipeStart.y - event.clientY;
+    gallerySwipeStart = null;
+    if (Math.abs(distanceX) < 45 || Math.abs(distanceX) <= Math.abs(distanceY) * 1.2) return;
+    showGalleryImage(galleryIndex + (distanceX > 0 ? 1 : -1));
+  });
+  viewport.addEventListener("pointercancel", () => { gallerySwipeStart = null; });
+  showGalleryImage(0);
+}
 
 const localDate = () => {
   const now = new Date();
