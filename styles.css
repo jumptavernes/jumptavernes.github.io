@@ -45,3 +45,10 @@
   .hero-cta{min-height:4.25rem;align-items:center}
   .state-tabs{margin-top:1.7rem}
 }
+
+/* Mobile-only hierarchy refinements. */
+@media(max-width:720px){
+  .eyebrow{max-width:19rem;color:#123d28;font-size:1.28rem;font-weight:650;line-height:1.08;letter-spacing:.065em;text-shadow:0 1px 0 rgba(255,255,255,.42)}
+  .hero-cta{min-height:3.15rem;padding:0 1.25rem;font-size:.92rem;line-height:1}
+  .cta-arrow{flex-basis:2rem;width:1.8rem;height:1.15rem;margin-left:1rem;stroke:#fff;stroke-width:3.15;filter:drop-shadow(0 1px 0 rgba(0,67,37,.62)) drop-shadow(0 2px 3px rgba(0,67,37,.24));transform:translateY(0)}
+}
