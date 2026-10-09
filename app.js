@@ -1,5 +1,5 @@
 import { SITE_CONFIG } from "./config.js?v=gallery-1";
-import { buildWhatsAppUrl } from "./whatsapp.js";
+import { buildWhatsAppUrl } from "./whatsapp.js?v=utf8-1";
 
 const hero = document.querySelector("[data-hero]");
 const stateButtons = [...document.querySelectorAll("[data-state-button]")];

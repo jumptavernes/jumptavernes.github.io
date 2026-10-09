@@ -10,17 +10,19 @@ export function buildWhatsAppMessage({ date, schedule, eventType, otherEvent = "
   if (!slot) throw new Error("Horario no válido");
   const eventDescription = eventType === "Otro" ? `Otro — ${otherEvent.trim()}` : eventType;
   const lines = [
-    "👋 Hola! quiero solicitar una reserva en JUMP Tavernes.",
+    "👋 Hola, quiero solicitar una reserva en JUMP Tavernes.",
     "",
     `📅 Fecha: ${formatDate(date)}`,
     `🕒 Horario: ${slot.message}`,
     `🎉 Tipo de evento: ${eventDescription}`
   ];
   if (people.trim()) lines.push(`👥 Personas: ${people.trim()}`);
-  lines.push("", "¿Podéis confirmarme si está disponible? 😊");
+  lines.push("", "¿Podéis confirmarme si está disponible? 🙂");
   return lines.join("\n");
 }
 
 export function buildWhatsAppUrl(data) {
-  return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(buildWhatsAppMessage(data))}`;
+  const message = buildWhatsAppMessage(data);
+  const encodedMessage = encodeURIComponent(message);
+  return `https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsappNumber}&text=${encodedMessage}`;
 }
